@@ -49,9 +49,7 @@
                                             <span><a href="" class="btn btn-warning">Đánh giá</a></span>
                                             <span><a href="" class="btn btn-info">Sửa</a></span>
                                             <span>
-                                                <a href="{{url('admin/quan-ly/'.$user->id)}}" class="btn btn-danger">Xóa</a></span>
-{{--                                                    <button data-toggle="modal" data-target="#confirm-delete" data-href="{{route('quan-ly.destroy',$user->id)}}" class="btn btn-danger" id="delete-btn">Xóa</button>--}}
-
+                                                 <button data-toggle="modal" data-target="#confirm-delete" data-href="{{route('quan-ly.destroy',$user->id)}}" class="btn btn-danger" id="delete-btn">Xóa</button>
                                             </span>
 
                                         </td>

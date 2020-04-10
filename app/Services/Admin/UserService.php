@@ -19,7 +19,6 @@ class UserService
     public function getAll(){
         return User::all();
     }
-
     public function findById($id){
         return User::find($id);
     }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\User\ScoreUserService;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class ScoreUserController extends Controller
 {
@@ -12,6 +15,12 @@ class ScoreUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $scoreuserService;
+    public function __construct(ScoreUserService $scoreuserService)
+    {
+        $this->scoreuserService = $scoreuserService;
+    }
+
     public function index()
     {
         //
@@ -25,6 +34,7 @@ class ScoreUserController extends Controller
     public function create()
     {
         //
+        return view('Frontend.ccvc');
     }
 
     /**
@@ -36,6 +46,54 @@ class ScoreUserController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            $score = $this->scoreuserService->save([
+                'i1' => $request->i1,
+                'i2' => $request->i2,
+                'ii1' => $request->ii1,
+                'ii2' => $request->ii2,
+                'ii3' => $request->ii3,
+                'ii4' => $request->ii4,
+                'ii5' => $request->ii5,
+                'iii1' => $request->iii1,
+                'iii2' => $request->iii2,
+                'iii3' => $request->iii3,
+                'iii4' => $request->iii4,
+                'iva1' => $request->iva1,
+                'iva2' => $request->iva2,
+                'iva3' => $request->iva3,
+                'ivb1' => $request->ivb1,
+                'ivb2' => $request->ivb2,
+                'ivb3' => $request->ivb3,
+                'ivc1' => $request->ivc1,
+                'ivc2' => $request->ivc2,
+                'ivd1' => $request->ivd1,
+                'ivd2' => $request->ivd2,
+                'ivd3' => $request->ivd3,
+                'ive1' => $request->ive1,
+                'ive2' => $request->ive2,
+                'ive3' => $request->ive3,
+                'v1' => $request->v1,
+                'v2' => $request->v2,
+                'v3' => $request->v3,
+                'v4' => $request->v4,
+                'user_id' => Auth::user()->id
+            ]);
+            return redirect(route('diem-vi-pham.create'));
+//            return response()->json([
+//                'status'=>true,
+//                'code'=>Response::HTTP_OK,
+//                'message'=>$score
+//            ]);
+        }
+        catch (\Exception $err){
+            return response()->json([
+                'status'=>false,
+                'code'=>Response::HTTP_UNPROCESSABLE_ENTITY,
+                'message'=>$err->getMessage()
+            ]);
+        }
+
     }
 
     /**

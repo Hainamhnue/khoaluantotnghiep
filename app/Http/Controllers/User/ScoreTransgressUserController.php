@@ -4,6 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\User\ScorePersonalTransgressService;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class ScoreTransgressUserController extends Controller
 {
@@ -12,6 +15,12 @@ class ScoreTransgressUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $scoreTransgressuserService;
+    public function __construct(ScorePersonalTransgressService $scoreTransgressuserService)
+    {
+        $this->scoreTransgressuserService = $scoreTransgressuserService;
+    }
+
     public function index()
     {
         //
@@ -25,6 +34,7 @@ class ScoreTransgressUserController extends Controller
     public function create()
     {
         //
+        return view('FrontEnd.vipham');
     }
 
     /**
@@ -36,6 +46,32 @@ class ScoreTransgressUserController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            $score = $this->scoreTransgressuserService->save([
+                'tras1'=>$request->tras1,
+                'tras2'=>$request->tras2,
+                'tras3'=>$request->tras3,
+                'tras4'=>$request->tras4,
+                'tras5'=>$request->tras5,
+                'tras6'=>$request->tras6,
+                'tras7'=>$request->tras7,
+                'tras8'=>$request->tras8,
+                'tras9'=>$request->tras9,
+                'tras10'=>$request->tras10,
+                'tras11'=>$request->tras11,
+                'tras12'=>$request->tras12,
+                'tras13'=>$request->tras13,
+                'user_id'=>Auth::user()->id
+            ]);
+            return view('FrontEnd.ccvc');
+        }
+        catch (\Exception $err){
+            return response()->json([
+                'status'=>false,
+                'code'=>Response::HTTP_UNPROCESSABLE_ENTITY,
+                'message'=>$err->getMessage()
+            ]);
+        }
     }
 
     /**

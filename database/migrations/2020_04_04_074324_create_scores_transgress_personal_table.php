@@ -27,6 +27,7 @@ class CreateScoresTransgressPersonalTable extends Migration
             $table->integer('tras10');
             $table->integer('tras11');
             $table->integer('tras12');
+            $table->integer('tras13');
             $table->foreignId('user_id');
             $table->timestamps();
         });

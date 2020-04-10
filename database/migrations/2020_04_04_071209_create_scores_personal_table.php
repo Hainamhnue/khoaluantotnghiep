@@ -44,7 +44,6 @@ class CreateScoresPersonalTable extends Migration
             $table->integer('v2');
             $table->integer('v3');
             $table->integer('v4');
-            $table->integer('v5');
             $table->foreignId('user_id');
             $table->timestamps();
         });
